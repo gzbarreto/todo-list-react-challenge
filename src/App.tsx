@@ -1,5 +1,8 @@
 import styles from "./App.module.css"
 
+import { PlusCircle } from "@phosphor-icons/react"
+
+
 function App() {
   return (
     <div className={styles.app}>
@@ -7,11 +10,11 @@ function App() {
         <img src="src\assets\logo.png" />
       </header>
 
-      <form>
+      <form className={styles.newTask}>
         <input placeholder="Adicione uma nova tarefa..."></input>
-        <button>
+        <button className={styles.buttonCreate}>
           Criar
-          {/* TODO: ADD ICON */}
+          <PlusCircle size={20} />
           </button>
       </form>
 
