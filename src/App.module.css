@@ -13,6 +13,7 @@
   height: 48px;
 }
 
+/* NEW TASK input AND button */
 .newTask {
   display: flex;
   gap: 0.5rem;
@@ -29,6 +30,7 @@
   border-radius: 8px;
   border: 1px solid var(--gray-700);
   caret-color: var(--gray-100);
+  color: var(--gray-100);
 }
 
 .newTask input::placeholder {
@@ -52,3 +54,29 @@
 .buttonCreate:hover {
   background: var(--blue);
 }
+
+/* TASK HEADER */
+.taskHeader {
+  display: flex;
+  justify-content: space-between;
+  margin: 4rem auto 1.5rem;
+  max-width: 736px;
+  font-weight: bold;
+  font-size: 0.875rem;
+}
+
+.createdTasks {
+  color: var(--blue);
+}
+
+.doneTasks {
+    color: var(--purple);
+}
+
+.taskHeader span {
+  background: var(--gray-400);
+  padding: 0.125rem 0.5rem ;
+  border-radius: 9999px;
+}
+
+/* TASK LIST */
