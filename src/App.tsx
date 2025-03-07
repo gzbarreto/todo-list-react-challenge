@@ -1,6 +1,7 @@
 import styles from "./App.module.css"
 
 import { PlusCircle } from "@phosphor-icons/react"
+import { Task } from "./components/Task"
 
 function App() {
   return (
@@ -19,14 +20,16 @@ function App() {
 
       <div className={styles.taskHeader}>
         <div className={styles.createdTasks}>
-          Tarefas criadas  <span>5</span>
+          Tarefas criadas <span>5</span>
         </div>
         <div className={styles.doneTasks}>
-          Concluídas  <span>2 de 5</span>
+          Concluídas <span>2 de 5</span>
         </div>
       </div>
 
-      <div>task list</div>
+      <div className={styles.taskList}>
+        <Task />
+      </div>
     </div>
   )
 }
