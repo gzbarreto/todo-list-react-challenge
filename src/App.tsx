@@ -5,11 +5,13 @@ import { Task } from "./components/Task"
 
 function App() {
   return (
+    // Aplication header and logo
     <div className={styles.app}>
       <header>
         <img src="src\assets\logo.png" />
       </header>
 
+      {/* Add new task input */}
       <form className={styles.newTask}>
         <input placeholder="Adicione uma nova tarefa..."></input>
         <button type="submit" className={styles.buttonCreate}>
@@ -18,6 +20,7 @@ function App() {
         </button>
       </form>
 
+{/* Task list header */}
       <div className={styles.taskHeader}>
         <div className={styles.createdTasks}>
           Tarefas criadas <span>5</span>
@@ -27,6 +30,7 @@ function App() {
         </div>
       </div>
 
+{/* Task list */}
       <div className={styles.taskList}>
         <Task />
       </div>
