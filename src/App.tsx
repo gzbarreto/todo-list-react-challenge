@@ -20,7 +20,7 @@ function App() {
         </button>
       </form>
 
-{/* Task list header */}
+      {/* Task list header */}
       <div className={styles.taskHeader}>
         <div className={styles.createdTasks}>
           Tarefas criadas <span>5</span>
@@ -30,9 +30,10 @@ function App() {
         </div>
       </div>
 
-{/* Task list */}
+      {/* Task list */}
       <div className={styles.taskList}>
-        <Task />
+        <Task isDone={false} />
+        <Task isDone={true} />
       </div>
     </div>
   )
