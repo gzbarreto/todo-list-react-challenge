@@ -6,7 +6,12 @@ interface checkboxProps {
 }
 
 export function Checkbox({isChecked} : checkboxProps) {
-  return (
-    (isChecked ? <div className={styles.checkboxChecked}>  <Check size={12}/> </div> : <div className={styles.checkbox}></div>)
+  return isChecked ? (
+    <span className={styles.checkboxChecked}>
+      {" "}
+      <Check size={12} />{" "}
+    </span>
+  ) : (
+    <span className={styles.checkbox}></span>
   )
 }

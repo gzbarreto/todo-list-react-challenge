@@ -3,23 +3,19 @@ import { Checkbox } from "./Checkbox.tsx"
 import styles from "./Task.module.css"
 
 interface taskProps {
+  key: number
   isDone: boolean
+  content: string
 }
 
-export function Task({ isDone }: taskProps) {
+export function Task({ content, isDone }: taskProps) {
   return (
     <div className={styles.task}>
       <Checkbox isChecked={isDone} />
       {isDone ? (
-        <label className={styles.labelStrikethrough}>
-          Integer urna interdum massa libero auctor neque turpis turpis semper.
-          Duis vel sed fames integer.
-        </label>
+        <label className={styles.labelStrikethrough}>{content}</label>
       ) : (
-        <label>
-          Integer urna interdum massa libero auctor neque turpis turpis semper.
-          Duis vel sed fames integer.
-        </label>
+        <label>{content}</label>
       )}
 
       <button>

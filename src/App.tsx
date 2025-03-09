@@ -2,8 +2,33 @@ import styles from "./App.module.css"
 
 import { PlusCircle } from "@phosphor-icons/react"
 import { Task } from "./components/Task"
+import { ChangeEvent, FormEvent, useState } from "react"
 
 function App() {
+  const [nextId, setNextId] = useState(1)
+  const [newTaskContent, setNewTaskContent] = useState("")
+  const [tasks, setTasks] = useState<{ id: number; content: string; isDone: boolean }[]>([])
+
+  function handleNewTaskChange(event: ChangeEvent<HTMLInputElement>) {
+    event.target.setCustomValidity("")
+    setNewTaskContent(event.target.value)
+  }
+
+  function handleNewTask(event: FormEvent) {
+    event.preventDefault()
+    setTasks([
+      ...tasks,
+      {
+        id: nextId,
+        content: newTaskContent,
+        isDone: false,
+      },
+    ])
+
+    setNewTaskContent("")
+    setNextId(nextId + 1)
+  }
+console.log(tasks)
   return (
     // Aplication header and logo
     <div className={styles.app}>
@@ -12,8 +37,13 @@ function App() {
       </header>
 
       {/* Add new task input */}
-      <form className={styles.newTask}>
-        <input placeholder="Adicione uma nova tarefa..."></input>
+      <form onSubmit={handleNewTask} className={styles.newTask}>
+        <input
+          value={newTaskContent}
+          required
+          onChange={handleNewTaskChange}
+          placeholder="Adicione uma nova tarefa..."
+        ></input>
         <button type="submit" className={styles.buttonCreate}>
           Criar
           <PlusCircle size={20} />
@@ -23,17 +53,18 @@ function App() {
       {/* Task list header */}
       <div className={styles.taskHeader}>
         <div className={styles.createdTasks}>
-          Tarefas criadas <span>5</span>
+          Tarefas criadas <span>{tasks.length}</span>
         </div>
         <div className={styles.doneTasks}>
-          Concluídas <span>2 de 5</span>
+          Concluídas <span>{tasks.filter(task => task.isDone === true).length} de {tasks.length}</span>
         </div>
       </div>
 
       {/* Task list */}
       <div className={styles.taskList}>
-        <Task isDone={false} />
-        <Task isDone={true} />
+        {tasks.map((task) => (
+          <Task key={task.id} content={task.content} isDone={task.isDone} />
+        ))}
       </div>
     </div>
   )
