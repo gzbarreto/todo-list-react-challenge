@@ -3,6 +3,7 @@ import styles from "./App.module.css"
 import { PlusCircle } from "@phosphor-icons/react"
 import { Task } from "./components/Task"
 import { ChangeEvent, FormEvent, useState } from "react"
+import { Empty } from "./components/Empty"
 
 function App() {
   const [nextId, setNextId] = useState(1)
@@ -32,13 +33,15 @@ function App() {
   }
 
   function handleTaskDone(taskId: number) {
-    setTasks(tasks.map(task => 
-      task.id === taskId ? { ...task, isDone: !task.isDone } : task
-    ))
+    setTasks(
+      tasks.map((task) =>
+        task.id === taskId ? { ...task, isDone: !task.isDone } : task
+      )
+    )
   }
 
   function handleTaskDelete(taskId: number) {
-    setTasks(tasks.filter(task => task.id !== taskId))
+    setTasks(tasks.filter((task) => task.id !== taskId))
   }
 
   return (
@@ -78,16 +81,22 @@ function App() {
 
       {/* Task list */}
       <div className={styles.taskList}>
-        {tasks.map((task) => (
-          <Task
-            onTaskDone={handleTaskDone}
-            onTaskDelete={handleTaskDelete}
-            key={task.id}
-            taskId={task.id}
-            content={task.content}
-            isDone={task.isDone}
-          />
-        ))}
+        {tasks.length > 0 ? (
+          <div>
+            {tasks.map((task) => (
+              <Task
+                onTaskDone={handleTaskDone}
+                onTaskDelete={handleTaskDelete}
+                key={task.id}
+                taskId={task.id}
+                content={task.content}
+                isDone={task.isDone}
+              />
+            ))}
+          </div>
+        ) : (
+          <Empty />
+        )}
       </div>
     </div>
   )
