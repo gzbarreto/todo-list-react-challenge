@@ -7,7 +7,9 @@ import { ChangeEvent, FormEvent, useState } from "react"
 function App() {
   const [nextId, setNextId] = useState(1)
   const [newTaskContent, setNewTaskContent] = useState("")
-  const [tasks, setTasks] = useState<{ id: number; content: string; isDone: boolean }[]>([])
+  const [tasks, setTasks] = useState<
+    { id: number; content: string; isDone: boolean }[]
+  >([])
 
   function handleNewTaskChange(event: ChangeEvent<HTMLInputElement>) {
     event.target.setCustomValidity("")
@@ -28,7 +30,13 @@ function App() {
     setNewTaskContent("")
     setNextId(nextId + 1)
   }
-console.log(tasks)
+
+  function handleTaskDone(taskId: number) {
+    setTasks(tasks.map(task => 
+      task.id === taskId ? { ...task, isDone: !task.isDone } : task
+    ))
+  }
+
   return (
     // Aplication header and logo
     <div className={styles.app}>
@@ -56,14 +64,24 @@ console.log(tasks)
           Tarefas criadas <span>{tasks.length}</span>
         </div>
         <div className={styles.doneTasks}>
-          Concluídas <span>{tasks.filter(task => task.isDone === true).length} de {tasks.length}</span>
+          Concluídas{" "}
+          <span>
+            {tasks.filter((task) => task.isDone === true).length} de{" "}
+            {tasks.length}
+          </span>
         </div>
       </div>
 
       {/* Task list */}
       <div className={styles.taskList}>
         {tasks.map((task) => (
-          <Task key={task.id} content={task.content} isDone={task.isDone} />
+          <Task
+            onTaskDone={handleTaskDone}
+            key={task.id}
+            taskId={task.id}
+            content={task.content}
+            isDone={task.isDone}
+          />
         ))}
       </div>
     </div>
