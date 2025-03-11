@@ -6,12 +6,17 @@ interface taskProps {
   taskId: number
   isDone: boolean
   content: string
-  onTaskDone: (key: number) => void
+  onTaskDone: (taskId: number) => void
+  onTaskDelete: (taskId: number) => void
 }
-export function Task({ content, isDone, onTaskDone, taskId }: taskProps) {
+export function Task({ content, isDone, onTaskDone, onTaskDelete, taskId }: taskProps) {
 
   function handleTaskDone() {
     onTaskDone(taskId)
+  }
+
+  function handleTaskDelete() {
+    onTaskDelete(taskId)
   }
 
   return (
@@ -23,7 +28,7 @@ export function Task({ content, isDone, onTaskDone, taskId }: taskProps) {
         <label>{content}</label>
       )}
 
-      <button>
+      <button onClick={handleTaskDelete}>
         <Trash size={14} />
       </button>
     </div>

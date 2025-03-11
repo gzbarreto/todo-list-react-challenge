@@ -37,6 +37,10 @@ function App() {
     ))
   }
 
+  function handleTaskDelete(taskId: number) {
+    setTasks(tasks.filter(task => task.id !== taskId))
+  }
+
   return (
     // Aplication header and logo
     <div className={styles.app}>
@@ -77,6 +81,7 @@ function App() {
         {tasks.map((task) => (
           <Task
             onTaskDone={handleTaskDone}
+            onTaskDelete={handleTaskDelete}
             key={task.id}
             taskId={task.id}
             content={task.content}
